@@ -15,10 +15,9 @@ model User {
     isVerify     Boolean  @default(false)
     avatar       String
     providerId   String   @unique
-    accesstoken  String
-    refreshtoken String
-    otp          String
-    otpExpiry    DateTime
+    accesstoken  String  
+    otp          String?
+    otpExpiry    DateTime?
     Form         Form[]   // This field represents the relation to the Form model
 }
 
