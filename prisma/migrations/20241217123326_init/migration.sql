@@ -18,6 +18,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Form" (
     "id" TEXT NOT NULL,
     "creatorID" TEXT NOT NULL,
+    "formName" TEXT NOT NULL,
     "fields" JSONB NOT NULL,
 
     CONSTRAINT "Form_pkey" PRIMARY KEY ("id")

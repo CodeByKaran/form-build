@@ -23,7 +23,8 @@ model User {
 
 model Form {
     id        String  @id @default(cuid())
-    creator   User    @relation(fields: [creatorID], references: [id])  // Correct relation setup
+    creator   User    @relation(fields: creatorID, references: id)  // Correct relation setup
     creatorID String  // Foreign key for the relation
-    fields Json 
+    formName String 
+    fields Json
 }
