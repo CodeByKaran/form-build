@@ -21,10 +21,24 @@ model User {
     Form         Form[]   // This field represents the relation to the Form model
 }
 
+enum Styles {
+    dark
+    light
+}
+
 model Form {
     id        String  @id @default(cuid())
     creator   User    @relation(fields: creatorID, references: id)  // Correct relation setup
     creatorID String  // Foreign key for the relation
     formName String 
+    isPublished Boolean @default(false)
+    style Styles @default(light)
     fields Json
+}
+
+model Formdata {
+    id Int @id @default(autoincrement())
+    formBy String
+    data Json
+    @@index([formBy])
 }

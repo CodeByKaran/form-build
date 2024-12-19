@@ -10,7 +10,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorization: {
         params: {
           prompt: "consent",
-          scope: "openid profile email", // Ensure these scopes are included
+          scope: "openid profile email", 
         },
       },
     }),
