@@ -7,8 +7,8 @@ export default async function DELETE(req: NextRequest) {
     const userId = url.searchParams.get("userId") || undefined;
     const formId = url.searchParams.get("formId") || undefined;
 
-    if(!userId || !formId){
-        throw new Error("Id's not provided")
+    if (!userId || !formId) {
+      throw new Error("Id's not provided");
     }
 
     const delteResult = await prisma.form.delete({
@@ -27,7 +27,6 @@ export default async function DELETE(req: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    
     console.log("error while deleting Form!", error);
     return NextResponse.json(
       {
