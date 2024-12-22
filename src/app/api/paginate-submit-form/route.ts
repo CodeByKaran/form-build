@@ -6,7 +6,7 @@ export default async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const pageSize = Number(url.searchParams.get("pageSize")) || 10;
     const page = Number(url.searchParams.get("page")) || 1;
-    const lastRecordId = url.searchParams.get("lastRecordId") || undefined;
+    const lastRecordId = url.searchParams.get("lastRecordId");
     const userId = url.searchParams.get("userId") || undefined;
 
     let forms;
@@ -27,21 +27,21 @@ export default async function GET(req: NextRequest) {
         },
       });
     } else {
-      forms = await prisma.form.findMany({
+      forms = await prisma.formdata.findMany({
         take: pageSize,
         where: {
-          creatorID: userId,
+          formBy: userId,
         },
         select: {
-          formName: true,
+          formBy: true,
           id: true,
         },
       });
     }
 
-    const totalResults = await prisma.form.count({
+    const totalResults = await prisma.formdata.count({
       where: {
-        creatorID: userId,
+        formBy: userId,
       },
     });
 
@@ -60,7 +60,7 @@ export default async function GET(req: NextRequest) {
       message: "Forms fetched successfully",
     });
   } catch (error) {
-    console.error("Error while paginating forms:", error);
+    console.error("Error while paginating submitted forms:", error);
     return NextResponse.json(
       {
         success: false,
