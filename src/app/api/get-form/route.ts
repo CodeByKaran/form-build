@@ -1,7 +1,7 @@
-import { prisma } from "@/libs/client";
+import { prisma } from "@/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const formId = url.searchParams.get("formId") || undefined;

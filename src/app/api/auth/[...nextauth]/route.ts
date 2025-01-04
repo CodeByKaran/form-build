@@ -1,3 +1,2 @@
-
-import { handlers } from "./options"
-export const { GET, POST } = handlers
+import {handlers} from "./options"
+export const { GET, POST } = handlers;

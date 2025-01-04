@@ -1,13 +1,17 @@
-import { prisma } from "@/libs/client";
+import { prisma } from "@/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const pageSize = Number(url.searchParams.get("pageSize")) || 10;
     const page = Number(url.searchParams.get("page")) || 1;
     const lastRecordId = url.searchParams.get("lastRecordId") || undefined;
     const userId = url.searchParams.get("userId") || undefined;
+
+    if(!userId){
+      throw new Error("please provide userID")
+    }
 
     let forms;
 
@@ -29,6 +33,7 @@ export default async function GET(req: NextRequest) {
     } else {
       forms = await prisma.form.findMany({
         take: pageSize,
+        skip: (page-1) * pageSize,
         where: {
           creatorID: userId,
         },

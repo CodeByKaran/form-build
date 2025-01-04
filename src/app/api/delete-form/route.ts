@@ -1,7 +1,7 @@
-import { prisma } from "@/libs/client";
+import { prisma } from "@/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async function DELETE(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const userId = url.searchParams.get("userId") || undefined;

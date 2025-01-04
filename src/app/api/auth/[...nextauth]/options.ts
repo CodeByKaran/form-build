@@ -1,10 +1,10 @@
-import NextAuth, { Session, User } from "next-auth";
+import NextAuth, { Account, Profile, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Google from "next-auth/providers/google";
-import { prisma } from "@/libs/client";
+import { prisma } from "@/lib/client";
 import { Prisma } from "@prisma/client";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const {handlers,signIn,signOut,auth} = NextAuth({
   providers: [
     Google({
       authorization: {

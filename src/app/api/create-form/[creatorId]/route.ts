@@ -1,4 +1,4 @@
-import { prisma } from "@/libs/client"; // Assuming you've set up Prisma client
+import { prisma } from "@/lib/client";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -30,14 +30,14 @@ export async function POST(
     const formData = await req.json();
 
     const isFormNameSame = await prisma.form.findFirst({
-      where:{
-        creatorID:creatorId,
-        formName:formData.formName
-      }
-    })
+      where: {
+        creatorID: creatorId,
+        formName: formData.formName,
+      },
+    });
 
-    if(isFormNameSame){
-      throw new Error("form name is already in use")
+    if (isFormNameSame) {
+      throw new Error("form name is already in use");
     }
 
     // Validate the fields (optional)
